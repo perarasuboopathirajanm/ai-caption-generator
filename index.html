@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CaptionCraft — AI Caption Generator</title>
+  <meta name="description" content="Upload an image and get ready-to-post social media captions and hashtags, written by Claude." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo">✦</span> CaptionCraft</div>
+    <a class="gh" href="https://github.com/perarasuboopathirajanm/ai-caption-generator" id="repoLink" target="_blank" rel="noopener">View on GitHub</a>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Turn any photo into <span class="grad">scroll-stopping captions</span></h1>
+      <p>Upload an image, pick a platform and tone, and AI writes captions and hashtags you can copy and post.</p>
+    </section>
+
+    <section class="grid">
+      <!-- LEFT: inputs -->
+      <div class="card">
+        <label class="drop" id="drop">
+          <input type="file" id="file" accept="image/*" hidden />
+          <div class="drop-empty" id="dropEmpty">
+            <div class="drop-icon">⬆</div>
+            <strong>Drop an image here</strong>
+            <span>or click to browse · JPG, PNG, WEBP</span>
+          </div>
+          <img id="preview" alt="Uploaded preview" hidden />
+        </label>
+
+        <div class="row">
+          <div class="field">
+            <span>Platform</span>
+            <div class="chips" id="platform">
+              <button type="button" class="chip on" data-v="Instagram">Instagram</button>
+              <button type="button" class="chip" data-v="LinkedIn">LinkedIn</button>
+              <button type="button" class="chip" data-v="X (Twitter)">X</button>
+              <button type="button" class="chip" data-v="Facebook">Facebook</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row two">
+          <label class="field">
+            <span>Tone</span>
+            <select id="tone">
+              <option>Friendly</option>
+              <option>Professional</option>
+              <option>Witty</option>
+              <option>Inspirational</option>
+              <option>Bold &amp; salesy</option>
+              <option>Minimal</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>How many</span>
+            <select id="count">
+              <option>3</option><option selected>4</option><option>5</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Context (optional)</span>
+          <input id="context" type="text" placeholder="e.g. launching our new coffee blend this Friday" />
+        </label>
+
+        <div class="row toggles">
+          <label class="tog"><input type="checkbox" id="hashtags" checked /> Hashtags</label>
+          <label class="tog"><input type="checkbox" id="emojis" checked /> Emojis</label>
+          <label class="tog"><input type="checkbox" id="cta" /> Call to action</label>
+        </div>
+
+        <details class="settings" id="settings">
+          <summary>API settings</summary>
+          <label class="field">
+            <span>Anthropic API key</span>
+            <input id="apiKey" type="password" placeholder="sk-ant-..." autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>Model</span>
+            <input id="model" type="text" value="claude-sonnet-4-5" />
+          </label>
+          <label class="tog"><input type="checkbox" id="remember" /> Remember key in this browser</label>
+          <p class="hint">Your key goes straight from your browser to Anthropic. It's never sent anywhere else.</p>
+        </details>
+
+        <div class="actions">
+          <button class="btn primary" id="go" disabled>Generate captions</button>
+          <button class="btn ghost" id="demo" type="button">Try demo</button>
+        </div>
+        <p class="error" id="error" hidden></p>
+      </div>
+
+      <!-- RIGHT: results -->
+      <div class="card results">
+        <div class="results-head">
+          <h2>Captions</h2>
+          <button class="btn small ghost" id="copyAll" hidden>Copy all</button>
+        </div>
+        <div id="out" class="out">
+          <div class="placeholder">
+            <p>Your captions will appear here.</p>
+            <p class="muted">No API key? Hit <b>Try demo</b> to see how it works.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">Built with the Claude API · <span id="year"></span></footer>
+  <div class="toast" id="toast">Copied!</div>
+  <script src="app.js"></script>
+</body>
+</html>
